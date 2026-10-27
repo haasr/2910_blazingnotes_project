@@ -200,7 +200,7 @@ Razor also has **directive attributes**, which you put on HTML elements: `@oncli
 
 The template's styling is replaced with a simple stylesheet built for this app.
 
-0. Download and unzip <a href="./starter.zip" rel="noopener">starter.zip</a>
+0. Download and unzip <a href="https://github.com/haasr/2910_blazingnotes_project/raw/refs/heads/main/starter.zip" rel="noopener">starter.zip</a>
 1. **Replace**  The contents of `wwwroot/app.css` with those of [`starter/app.css`](starter/app.css). Bootstrap 5 stays; `App.razor` already loads it.
 2. **Delete** these files. They're "scoped CSS" files for the template's old layout:
    - `Components/Layout/MainLayout.razor.css`
