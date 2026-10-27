@@ -12,7 +12,7 @@ A Razor component without a `@rendermode` directive uses **static server-side re
 4. The browser displays the HTML. There's no live connection: `@onclick` handlers don't work, but links and HTML forms do.
 
 <figure>
-    <object data="./figures/05-static-ssr-render.svg" type="image/svg+xml"></object>
+    <object data="https://github.com/haasr/2910_blazingnotes_project/raw/refs/heads/main/figures/05-static-ssr-render.svg" type="image/svg+xml"></object>
     <figcaption>A Razor component with no @rendermode directive, handling GET /notes/5</figcaption>
 <figure>
 
