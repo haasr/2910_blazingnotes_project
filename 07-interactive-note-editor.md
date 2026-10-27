@@ -12,10 +12,8 @@ None of this needs JavaScript. You write it all in C#.
 
 Add `@rendermode InteractiveServer` to a component (or `@rendermode="InteractiveServer"` where you *use* one) and Blazor changes how it runs:
 
-<figure>
-    <object data="./figures/07-interactive-note-editor.svg" type="image/svg+xml"></object>
-    <figcaption>A Razor component with @rendermode InteractiveServer directive, handling GET /notes/new</figcaption>
-<figure>
+
+![InteractiveServer render mode diagram](figures/07-interactive-note-editor.svg)
 
 Compare this with the pages from Lessons 5 and 6:
 
