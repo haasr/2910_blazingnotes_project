@@ -1,0 +1,86 @@
+<svg viewBox="0 0 960 560" role="img" aria-label="Sequence diagram of a static server-side rendered Razor page request">
+    <style>
+        text {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+
+    <defs>
+        <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#6f42c1"/>
+        </marker>
+        <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d6efd"/>
+        </marker>
+    </defs>
+
+    <rect width="960" height="560" fill="#ffffff"/>
+
+    <!-- Lifelines -->
+    <g stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="6 5">
+        <line x1="150" y1="80" x2="150" y2="530"/>
+        <line x1="480" y1="80" x2="480" y2="480"/>
+        <line x1="810" y1="80" x2="810" y2="530"/>
+    </g>
+
+    <!-- Headers -->
+    <g font-size="16" font-weight="600" text-anchor="middle" fill="#fff">
+        <rect x="55" y="28" width="190" height="52" rx="8" fill="#6f42c1"/>
+        <text x="150" y="60">Browser</text>
+        <rect x="385" y="28" width="190" height="52" rx="8" fill="#6610f2"/>
+        <text x="480" y="60">Razor page</text>
+        <rect x="690" y="28" width="240" height="52" rx="8" fill="#0d6efd"/>
+        <text x="810" y="60">NoteService → SQLite</text>
+    </g>
+
+    <!-- Activation boxes -->
+    <g fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5">
+        <rect x="142" y="165" width="16" height="285" rx="2"/>
+        <rect x="472" y="165" width="16" height="285" rx="2"/>
+    </g>
+    <rect x="802" y="285" width="16" height="50" rx="2" fill="#e7f0ff" stroke="#0d6efd" stroke-width="1.5"/>
+
+    <!-- 1. GET request -->
+    <line x1="158" y1="180" x2="470" y2="180" stroke="#6f42c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="314" y="170" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">GET /notes/5</text>
+
+    <!-- 2a. OnInitializedAsync self-call -->
+    <path d="M488 210 H545 V240 H490" fill="none" stroke="#6f42c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="555" y="230" font-size="15" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" fill="#212529">OnInitializedAsync()</text>
+
+    <!-- 2b. Call to service -->
+    <line x1="488" y1="290" x2="800" y2="290" stroke="#6f42c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="644" y="280" text-anchor="middle" font-size="14" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" fill="#212529">await Notes.GetNoteAsync(5)</text>
+
+    <!-- 2c. Return Note -->
+    <line x1="802" y1="330" x2="490" y2="330" stroke="#0d6efd" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowBlue)"/>
+    <text x="646" y="320" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">Note</text>
+
+    <!-- 3a. Render self-call -->
+    <path d="M488 365 H545 V395 H490" fill="none" stroke="#6f42c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="555" y="385" font-size="15" fill="#212529">render markup → HTML</text>
+
+    <!-- 3b. HTML back to browser -->
+    <line x1="472" y1="435" x2="160" y2="435" stroke="#0d6efd" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowBlue)"/>
+    <text x="316" y="425" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">HTML page</text>
+
+    <!-- Component discarded -->
+    <g stroke="#dc3545" stroke-width="3" stroke-linecap="round">
+        <line x1="467" y1="465" x2="493" y2="491"/>
+        <line x1="493" y1="465" x2="467" y2="491"/>
+    </g>
+    <text x="508" y="483" font-size="15" font-style="italic" fill="#dc3545">component discarded</text>
+
+    <!-- Browser note -->
+    <rect x="30" y="470" width="240" height="56" rx="8" fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5"/>
+    <text x="150" y="493" text-anchor="middle" font-size="14" font-weight="600" fill="#6f42c1">Displays the HTML</text>
+    <text x="150" y="512" text-anchor="middle" font-size="13" fill="#6c757d">no live connection afterward</text>
+
+    <!-- Step badges -->
+    <g font-size="13" font-weight="700" text-anchor="middle" fill="#fff">
+        <circle cx="30" cy="175" r="13" fill="#6f42c1"/><text x="30" y="180">1</text>
+        <circle cx="30" cy="260" r="13" fill="#6f42c1"/><text x="30" y="265">2</text>
+        <circle cx="30" cy="400" r="13" fill="#6f42c1"/><text x="30" y="405">3</text>
+        <circle cx="930" cy="435" r="13" fill="#6f42c1"/><text x="930" y="440">4</text>
+    </g>
+</svg>

@@ -1,0 +1,82 @@
+<svg viewBox="0 0 960 480" role="img" aria-label="Sequence diagram: browser POSTs a delete to notes/5/delete, server responds 302 redirect, browser GETs the home page, server returns HTML">
+    <style>
+        text {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#6f42c1"/>
+      </marker>
+      <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d6efd"/>
+      </marker>
+    </defs>
+ 
+    <rect width="960" height="480" fill="#ffffff"/>
+ 
+    <!-- Phase bands -->
+    <rect x="0" y="92" width="960" height="150" fill="#ffffff"/>
+    <rect x="0" y="242" width="960" height="208" fill="#f8f5fd"/>
+    <g stroke="#e2d9f3" stroke-width="1">
+      <line x1="0" y1="242" x2="960" y2="242"/>
+      <line x1="0" y1="450" x2="960" y2="450"/>
+    </g>
+    <g font-size="11" font-weight="700" letter-spacing="1.5" fill="#9a84c9">
+      <text x="14" y="110">POST: THE ACTION</text>
+      <text x="14" y="260">GET: THE FOLLOW-UP</text>
+    </g>
+ 
+    <!-- Lifelines -->
+    <g stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="6 5">
+      <line x1="120" y1="80" x2="120" y2="450"/>
+      <line x1="700" y1="80" x2="700" y2="450"/>
+    </g>
+ 
+    <!-- Headers -->
+    <g font-size="16" font-weight="600" text-anchor="middle" fill="#fff">
+      <rect x="25" y="28" width="190" height="52" rx="8" fill="#6f42c1"/>
+      <text x="120" y="60">Browser</text>
+      <rect x="570" y="28" width="260" height="52" rx="8" fill="#0d6efd"/>
+      <text x="700" y="60">Server (Razor page)</text>
+    </g>
+ 
+    <!-- 1. POST -->
+    <line x1="122" y1="145" x2="698" y2="145" stroke="#6f42c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="410" y="135" text-anchor="middle" font-size="15" font-weight="600" fill="#212529"><tspan font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">POST /notes/5</tspan> <tspan font-weight="400" fill="#6c757d">(user clicked Delete)</tspan></text>
+ 
+    <rect x="725" y="122" width="225" height="42" rx="8" fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5"/>
+    <circle cx="745" cy="143" r="12" fill="#6f42c1"/>
+    <text x="745" y="148" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
+    <text x="765" y="148" font-size="13" fill="#212529"><tspan font-weight="700">Delete</tspan> note 5</text>
+ 
+    <!-- 2. 302 -->
+    <line x1="698" y1="215" x2="122" y2="215" stroke="#0d6efd" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowBlue)"/>
+    <text x="410" y="205" text-anchor="middle" font-size="15" font-weight="600" fill="#212529"><tspan fill="#0d6efd">302</tspan> Redirect: <tspan font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">/</tspan></text>
+ 
+    <rect x="725" y="188" width="225" height="46" rx="8" fill="#f1ebfa" stroke="#6610f2" stroke-width="1.5"/>
+    <circle cx="745" cy="211" r="12" fill="#6610f2"/>
+    <text x="745" y="216" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
+    <text x="765" y="207" font-size="13" fill="#212529">Respond with a redirect,</text>
+    <text x="765" y="224" font-size="13" fill="#212529" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">Location: /</text>
+ 
+    <!-- 3. Browser follows -->
+    <rect x="20" y="276" width="200" height="46" rx="8" fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5"/>
+    <circle cx="40" cy="299" r="12" fill="#6f42c1"/>
+    <text x="40" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
+    <text x="60" y="296" font-size="13" fill="#212529">Follows the redirect</text>
+    <text x="60" y="313" font-size="13" fill="#212529">automatically</text>
+ 
+    <!-- GET / -->
+    <line x1="122" y1="360" x2="698" y2="360" stroke="#6f42c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="410" y="350" text-anchor="middle" font-size="15" font-weight="600" fill="#212529"><tspan font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">GET /</tspan></text>
+ 
+    <rect x="725" y="337" width="225" height="42" rx="8" fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5"/>
+    <circle cx="745" cy="358" r="12" fill="#6f42c1"/>
+    <text x="745" y="363" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4</text>
+    <text x="765" y="363" font-size="13" fill="#212529"><tspan font-weight="700">Render</tspan> the home page</text>
+ 
+    <!-- HTML back -->
+    <line x1="698" y1="420" x2="122" y2="420" stroke="#0d6efd" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowBlue)"/>
+    <text x="410" y="410" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">HTML</text>
+  </svg>

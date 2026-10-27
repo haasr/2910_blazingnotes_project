@@ -1,0 +1,131 @@
+<svg viewBox="0 0 960 680" role="img" aria-label="Sequence diagram of a Blazor InteractiveServer component: prerender, circuit startup over SignalR, then a user input event and DOM patch">
+    <style>
+        text {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#6f42c1"/>
+      </marker>
+      <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d6efd"/>
+      </marker>
+      <marker id="arrowWsP" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="16" markerHeight="16" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#6610f2"/>
+      </marker>
+      <marker id="arrowWsB" markerUnits="userSpaceOnUse" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="16" markerHeight="16" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#0d6efd"/>
+      </marker>
+    </defs>
+ 
+    <rect width="960" height="680" fill="#ffffff"/>
+ 
+    <!-- Phase bands -->
+    <rect x="0" y="92" width="960" height="150" fill="#ffffff"/>
+    <rect x="0" y="242" width="960" height="108" fill="#f8f5fd"/>
+    <rect x="0" y="350" width="960" height="300" fill="#ffffff"/>
+    <g stroke="#e2d9f3" stroke-width="1">
+      <line x1="0" y1="242" x2="960" y2="242"/>
+      <line x1="0" y1="350" x2="960" y2="350"/>
+      <line x1="0" y1="650" x2="960" y2="650"/>
+    </g>
+    <g font-size="11" font-weight="700" letter-spacing="1.5" fill="#9a84c9">
+      <text x="14" y="110">INITIAL REQUEST</text>
+      <text x="14" y="260">CONNECT</text>
+      <text x="14" y="368">USER INTERACTION</text>
+    </g>
+ 
+    <!-- Lifelines -->
+    <g stroke="#adb5bd" stroke-width="1.5" stroke-dasharray="6 5">
+      <line x1="120" y1="80" x2="120" y2="650"/>
+      <line x1="700" y1="80" x2="700" y2="295"/>
+    </g>
+    <!-- Circuit alive: solid server lifeline -->
+    <line x1="700" y1="295" x2="700" y2="650" stroke="#c9b6f0" stroke-width="7"/>
+ 
+    <!-- Headers -->
+    <g font-size="16" font-weight="600" text-anchor="middle" fill="#fff">
+      <rect x="25" y="28" width="190" height="52" rx="8" fill="#6f42c1"/>
+      <text x="120" y="60">Browser</text>
+      <rect x="605" y="28" width="190" height="52" rx="8" fill="#0d6efd"/>
+      <text x="700" y="60">Server</text>
+    </g>
+ 
+    <!-- ===== 1. Prerender ===== -->
+    <line x1="122" y1="140" x2="698" y2="140" stroke="#6f42c1" stroke-width="2" marker-end="url(#arrow)"/>
+    <text x="410" y="130" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">GET /notes/new</text>
+ 
+    <line x1="698" y1="210" x2="122" y2="210" stroke="#0d6efd" stroke-width="2" stroke-dasharray="7 5" marker-end="url(#arrowBlue)"/>
+    <text x="410" y="200" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">HTML <tspan font-weight="400" fill="#6c757d">(looks complete, but inert)</tspan></text>
+ 
+    <rect x="725" y="108" width="225" height="62" rx="8" fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5"/>
+    <circle cx="745" cy="139" r="12" fill="#6f42c1"/>
+    <text x="745" y="144" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
+    <text x="765" y="134" font-size="13" fill="#212529"><tspan font-weight="700">Prerender</tspan> component</text>
+    <text x="765" y="152" font-size="13" fill="#212529">to HTML (like static SSR)</text>
+ 
+    <!-- ===== 2. Circuit ===== -->
+    <g>
+      <line x1="122" y1="295" x2="684" y2="295" stroke="#6610f2" stroke-width="5" marker-end="url(#arrowWsP)"/>
+      <line x1="122" y1="295" x2="684" y2="295" stroke="#f8f5fd" stroke-width="1.5"/>
+    </g>
+    <text x="410" y="283" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">blazor.web.js opens a WebSocket <tspan font-weight="400" fill="#6c757d">(SignalR)</tspan></text>
+ 
+    <rect x="725" y="262" width="225" height="74" rx="8" fill="#f1ebfa" stroke="#6610f2" stroke-width="1.5"/>
+    <circle cx="745" cy="299" r="12" fill="#6610f2"/>
+    <text x="745" y="304" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
+    <text x="765" y="285" font-size="13" fill="#212529"><tspan font-weight="700">Start a CIRCUIT:</tspan> create</text>
+    <text x="765" y="303" font-size="13" fill="#212529">the component <tspan font-weight="700" fill="#dc3545">AGAIN</tspan> and</text>
+    <text x="765" y="321" font-size="13" fill="#212529">keep it alive in server memory</text>
+ 
+    <!-- ===== 3-5. Interaction ===== -->
+    <rect x="20" y="388" width="200" height="38" rx="8" fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5"/>
+    <text x="120" y="411" text-anchor="middle" font-size="13" fill="#212529">User types “H” in the title box</text>
+ 
+    <g>
+      <line x1="122" y1="445" x2="684" y2="445" stroke="#6610f2" stroke-width="5" marker-end="url(#arrowWsP)"/>
+      <line x1="122" y1="445" x2="684" y2="445" stroke="#ffffff" stroke-width="1.5"/>
+    </g>
+    <text x="410" y="433" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">event: <tspan font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="14">input, value="H"</tspan></text>
+ 
+    <!-- server boxes -->
+    <g stroke-width="1.5">
+      <rect x="725" y="392" width="225" height="52" rx="8" fill="#f1ebfa" stroke="#6f42c1"/>
+      <rect x="725" y="452" width="225" height="34" rx="8" fill="#f1ebfa" stroke="#6f42c1"/>
+      <rect x="725" y="494" width="225" height="54" rx="8" fill="#f1ebfa" stroke="#6610f2"/>
+    </g>
+    <g font-size="13" font-weight="700" text-anchor="middle" fill="#fff">
+      <circle cx="745" cy="418" r="12" fill="#6f42c1"/><text x="745" y="423">3</text>
+      <circle cx="745" cy="469" r="12" fill="#6f42c1"/><text x="745" y="474">4</text>
+      <circle cx="745" cy="521" r="12" fill="#6610f2"/><text x="745" y="526">5</text>
+    </g>
+    <g font-size="13" fill="#212529">
+      <text x="765" y="414">Update the bound field:</text>
+      <text x="765" y="432" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="12.5">note.Title = "H"</text>
+      <text x="765" y="474">Run the handler (if any)</text>
+      <text x="765" y="516"><tspan font-weight="700">RE-RENDER</tspan>, then <tspan font-weight="700">DIFF</tspan> the</text>
+      <text x="765" y="534">new output against the old</text>
+    </g>
+ 
+    <text x="684" y="520" text-anchor="end" font-size="13" font-style="italic" fill="#6610f2">circuit stays alive</text>
+ 
+    <!-- Patch back -->
+    <g>
+      <line x1="684" y1="585" x2="122" y2="585" stroke="#0d6efd" stroke-width="5" marker-end="url(#arrowWsB)"/>
+      <line x1="684" y1="585" x2="122" y2="585" stroke="#ffffff" stroke-width="1.5"/>
+    </g>
+    <text x="410" y="573" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">tiny DOM patch <tspan font-weight="400" fill="#6c757d">(e.g. the enabled Save button)</tspan></text>
+ 
+    <rect x="20" y="602" width="200" height="38" rx="8" fill="#f1ebfa" stroke="#6f42c1" stroke-width="1.5"/>
+    <text x="120" y="625" text-anchor="middle" font-size="13" fill="#212529">Browser applies the patch</text>
+ 
+    <!-- Legend -->
+    <g font-size="12" fill="#6c757d">
+      <line x1="560" y1="668" x2="590" y2="668" stroke="#6f42c1" stroke-width="2"/>
+      <text x="597" y="672">HTTP request</text>
+      <line x1="690" y1="668" x2="720" y2="668" stroke="#6610f2" stroke-width="5"/>
+      <line x1="690" y1="668" x2="720" y2="668" stroke="#ffffff" stroke-width="1.5"/>
+      <text x="727" y="672">WebSocket (SignalR) message</text>
+    </g>
+</svg>
