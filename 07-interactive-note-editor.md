@@ -13,7 +13,7 @@ None of this needs JavaScript. You write it all in C#.
 Add `@rendermode InteractiveServer` to a component (or `@rendermode="InteractiveServer"` where you *use* one) and Blazor changes how it runs:
 
 
-![InteractiveServer render mode diagram](figures/07-interactive-note-editor.svg)
+![InteractiveServer render mode diagram](figures/07-interactive-server-render.svg)
 
 Compare this with the pages from Lessons 5 and 6:
 
