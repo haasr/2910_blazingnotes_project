@@ -8,10 +8,7 @@ You could make Delete a plain link such as `<a href="notes/5/delete">`, but **GE
 
 After the server handles the POST, it **redirects** the browser to another page:
 
-<figure>
-    <object data="./figures/08-post-delete-redirect.svg" type="image/svg+xml"></object>
-    <figcaption>Server responds with 302 redirect after the deletion, browser GETs the home page, server returns HTML</figcaption>
-<figure>
+![Server redirection flow diagram](figures/08-post-delete-redirect.svg)
 
 Why redirect instead of returning HTML straight from the POST? If the user refreshes a page that came from a POST, the browser **re-submits the form**. After a redirect, a refresh is just a harmless GET. This pattern is called **Post/Redirect/Get**.
 
